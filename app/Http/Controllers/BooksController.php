@@ -10,11 +10,19 @@ class BooksController extends Controller
 {
     public function store(BookRequest $request)
     {
-        Book::create($request->all());
+        $book = Book::create($request->all());
+        return redirect($book->path());
     }
 
     public function update(BookRequest $request, Book $book)
     {
         $book->update($request->all());
+        return redirect($book->path());
+    }
+
+    public function destroy(Book $book)
+    {
+        $book->delete();
+        return redirect('/books');
     }
 }
